@@ -1,0 +1,14 @@
+language: objective-c 
+osx_image: xcode8
+xcode_project: OnyxClient.xcodeproj
+xcode_scheme: OnyxClient
+cache:
+  directories:
+    - Carthage
+
+before_install:
+  - brew update
+  - brew install swiftlint || true
+
+script: swiftlint
+
