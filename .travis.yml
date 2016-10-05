@@ -11,7 +11,7 @@ before_install:
 - brew outdated carthage || brew upgrade carthage
 - brew install swiftlint || true
 before_script:
-- carthage bootstrap
+- carthage bootstrap --platform ios
 script: swiftlint
 before_deploy:
 - carthage build --no-skip-current
