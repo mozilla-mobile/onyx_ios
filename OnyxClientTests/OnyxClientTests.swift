@@ -6,5 +6,4 @@ import XCTest
 @testable import OnyxClient
 
 class OnyxClientTests: XCTestCase {
-    
 }

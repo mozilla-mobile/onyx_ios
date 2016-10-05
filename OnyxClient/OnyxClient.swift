@@ -4,7 +4,6 @@
 
 import Foundation
 import Alamofire
-import CocoaLumberjackSwift
 
 public enum OnyxEndpoint: String {
     case activityStream = "links/activity-stream"
@@ -40,7 +39,6 @@ public class OnyxClient {
     /// - parameter ping: Onyx ping to send to the server.
     public func sendPing(ping: OnyxPing, toEndpoint endpoint: OnyxEndpoint) {
         guard let pingURL = configuration.urlForEndpoint(endpoint) else {
-            DDLogError("Invalid endpoint used to send ping")
             return
         }
 
@@ -48,7 +46,6 @@ public class OnyxClient {
         do {
             payload = try ping.asPayload()
         } catch let e as NSError {
-            DDLogError("Failed to serialize ping payload: \(ping). Error: \(e.localizedDescription)")
             return
         }
 
@@ -61,7 +58,6 @@ public class OnyxClient {
         request.HTTPBody = payload
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         Alamofire.request(request).responseJSON { response in
-            DDLogInfo("Ping sent response code: \(response.response?.statusCode ?? -1)")
         }
     }
 }
