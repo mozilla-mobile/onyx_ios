@@ -2,7 +2,7 @@ language: objective-c
 osx_image: xcode8
 xcode_project: OnyxClient.xcodeproj
 xcode_scheme: OnyxClient
-xcode_sdk: xcodesimulator10.0
+xcode_sdk: iphonesimulator10.0
 env:
   global:
   - FRAMEWORK_NAME=<OnyxClient>
