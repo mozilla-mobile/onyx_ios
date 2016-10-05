@@ -69,6 +69,7 @@ public struct EventPing {
     public let actionPosition: Int
     public let locale: String
     public let action: String
+    public let provider: String?
 
     // TODO: Unused desktop fields. Figure out what we want to do for mobile
     let tabID = ""
@@ -77,20 +78,21 @@ public struct EventPing {
     let metadataSource = ""
 
     public init(event: String, page: String, source: String, actionPosition: Int, locale: NSLocale,
-                action: String) {
+                action: String, provider: String? = nil) {
         self.event = event
         self.page = page
         self.source = source
         self.actionPosition = actionPosition
         self.locale = locale.localeIdentifier
         self.action = action
+        self.provider = provider
     }
 }
 
 // MARK: - EventPing:OnyxPing
 extension EventPing: OnyxPing {
     public func asPayload() throws -> NSData {
-        let toDict: [String: AnyObject] = [
+        var toDict: [String: AnyObject] = [
             "event": self.event,
             "page": self.page,
             "source": self.source,
@@ -102,6 +104,7 @@ extension EventPing: OnyxPing {
             "addon_version": self.addonVersion,
             "metadata_source": self.metadataSource
         ]
+        toDict.optAdd(self.provider, key: "provider")
         return try NSJSONSerialization.dataWithJSONObject(toDict, options: .PrettyPrinted)
     }
 }

@@ -4,28 +4,43 @@
 
 import Foundation
 import Alamofire
+import CocoaLumberjackSwift
 
-public typealias OnyxEndpoint = String
+public enum OnyxEndpoint: String {
+    case activityStream = "links/activity-stream"
+}
 
 /// Properties and settings for setting up a Onyx client.
 public struct OnyxClientConfiguration {
-    let serverURL: NSURL
+    public let serverURL: NSURL
+    public let version: Int
+
+    public init(serverURL: NSURL, version: Int) {
+        self.serverURL = serverURL
+        self.version = version
+    }
+
+    private func urlForEndpoint(endpoint: OnyxEndpoint) -> NSURL? {
+        let components = NSURLComponents(URL: serverURL, resolvingAgainstBaseURL: false)!
+        components.path = "/v\(version)/\(endpoint.rawValue)"
+        return components.URL!
+    }
 }
 
 /// A simple client that sends pings to the configured Onyx Server
 public class OnyxClient {
     private let configuration: OnyxClientConfiguration
 
-    init(configuration: OnyxClientConfiguration) {
+    public init(configuration: OnyxClientConfiguration) {
         self.configuration = configuration
     }
 
     /// Sends the given ping to the Onyx server.
     ///
     /// - parameter ping: Onyx ping to send to the server.
-    public func sendPing(endpoint: OnyxEndpoint, ping: OnyxPing) {
-        guard let pingURL = onyxEndpointURL(endpoint) else {
-            // Log error
+    public func sendPing(ping: OnyxPing, toEndpoint endpoint: OnyxEndpoint) {
+        guard let pingURL = configuration.urlForEndpoint(endpoint) else {
+            DDLogError("Invalid endpoint used to send ping")
             return
         }
 
@@ -33,7 +48,7 @@ public class OnyxClient {
         do {
             payload = try ping.asPayload()
         } catch let e as NSError {
-            // log error
+            DDLogError("Failed to serialize ping payload: \(ping). Error: \(e.localizedDescription)")
             return
         }
 
@@ -46,12 +61,7 @@ public class OnyxClient {
         request.HTTPBody = payload
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         Alamofire.request(request).responseJSON { response in
-            print("Sent request!")
+            DDLogInfo("Ping sent response code: \(response.response?.statusCode ?? -1)")
         }
-    }
-
-    private func onyxEndpointURL(endpoint: OnyxEndpoint) -> NSURL? {
-        // TODO: Check that this actually works...
-        return configuration.serverURL.URLByAppendingPathComponent(endpoint, isDirectory: false)
     }
 }
