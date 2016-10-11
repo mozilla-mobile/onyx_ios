@@ -34,10 +34,35 @@ public class OnyxClient {
         self.configuration = configuration
     }
 
-    /// Sends the given ping to the Onyx server.
+    /// Sends the given event ping to the Onyx server.
     ///
-    /// - parameter ping: Onyx ping to send to the server.
-    public func sendPing(ping: OnyxPing, toEndpoint endpoint: OnyxEndpoint) {
+    /// - parameter ping: Event ping to send to the server.
+    public func sendEventPing(ping: EventPing, toEndpoint endpoint: OnyxEndpoint) {
+        sendPing(ping, toEndpoint: endpoint)
+    }
+
+    /// Returns and begins a handle to an Onyx session which tracks duration.
+    ///
+    /// - returns: An OnyxSession object that has begun.
+    public func beginSession() -> OnyxSession {
+        let session = OnyxSession()
+        session.start()
+        return session
+    }
+
+    /// Finishes the given session and sends the associated session ping to the Onyx server.
+    ///
+    /// - parameter session:        OnyxSession object.
+    /// - parameter sendToEndpoint: Endpoint to send Session ping to.
+    public func endSession(session: OnyxSession, sendToEndpoint endpoint: OnyxEndpoint) {
+        session.end()
+        guard let ping = session.ping else {
+            return
+        }
+        self.sendPing(ping, toEndpoint: endpoint)
+    }
+
+    private func sendPing(ping: OnyxPing, toEndpoint endpoint: OnyxEndpoint) {
         guard let pingURL = configuration.urlForEndpoint(endpoint) else {
             return
         }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E6BB2F7D1DAD641500024122 /* OnyxSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BB2F7C1DAD641500024122 /* OnyxSession.swift */; };
 		E6CB64A01DA3F24E00887098 /* OnyxClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6CB64961DA3F24E00887098 /* OnyxClient.framework */; };
 		E6CB64A51DA3F24E00887098 /* OnyxClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CB64A41DA3F24E00887098 /* OnyxClientTests.swift */; };
 		E6CB64A71DA3F24E00887098 /* OnyxClient.h in Headers */ = {isa = PBXBuildFile; fileRef = E6CB64991DA3F24E00887098 /* OnyxClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E6BB2F7C1DAD641500024122 /* OnyxSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnyxSession.swift; sourceTree = "<group>"; };
 		E6CB64961DA3F24E00887098 /* OnyxClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OnyxClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6CB64991DA3F24E00887098 /* OnyxClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OnyxClient.h; sourceTree = "<group>"; };
 		E6CB649A1DA3F24E00887098 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -37,7 +39,6 @@
 		E6CB64B41DA3F2F300887098 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		E6CB64B51DA3F2F300887098 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E6CB64B91DA3F54000887098 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		E6CB64C11DA42A4C00887098 /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +89,7 @@
 				E6CB649A1DA3F24E00887098 /* Info.plist */,
 				E6CB64B01DA3F29F00887098 /* OnyxClient.swift */,
 				E6CB64B11DA3F29F00887098 /* OnyxPingTypes.swift */,
+				E6BB2F7C1DAD641500024122 /* OnyxSession.swift */,
 			);
 			path = OnyxClient;
 			sourceTree = "<group>";
@@ -104,7 +106,6 @@
 		E6CB64B81DA3F54000887098 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E6CB64C11DA42A4C00887098 /* CocoaLumberjackSwift.framework */,
 				E6CB64B91DA3F54000887098 /* Alamofire.framework */,
 			);
 			name = Frameworks;
@@ -243,6 +244,7 @@
 			files = (
 				E6CB64B21DA3F29F00887098 /* OnyxClient.swift in Sources */,
 				E6CB64B31DA3F29F00887098 /* OnyxPingTypes.swift in Sources */,
+				E6BB2F7D1DAD641500024122 /* OnyxSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

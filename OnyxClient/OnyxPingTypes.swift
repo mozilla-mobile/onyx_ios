@@ -22,7 +22,8 @@ public struct SessionPing {
     public let locale: String
     public let page: String?
     public let action: String?
-    public let sessionDuration: Int
+
+    var sessionDuration: Int = 0
 
     // TODO: Unused desktop fields. Figure out what we want to do for mobile
     let tabID = ""
@@ -33,7 +34,7 @@ public struct SessionPing {
     let totalBookmarks = 0
 
     public init(url: NSURL?, loadReason: String?, unloadReason: String?, loadLatency: Int?, locale: NSLocale,
-                page: String?, action: String?, sessionDuration: Int) {
+                page: String?, action: String?) {
         self.url = url?.absoluteString
         self.loadReason = loadReason
         self.unloadReason = unloadReason
@@ -41,7 +42,6 @@ public struct SessionPing {
         self.locale = locale.localeIdentifier
         self.page = page
         self.action = action
-        self.sessionDuration = sessionDuration
     }
 }
 
