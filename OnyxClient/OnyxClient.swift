@@ -6,7 +6,7 @@ import Foundation
 import Alamofire
 
 public enum OnyxEndpoint: String {
-    case activityStream = "links/activity-stream"
+    case activityStream = "links/activity-stream-mobile"
 }
 
 /// Properties and settings for setting up a Onyx client.
